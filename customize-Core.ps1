@@ -46,6 +46,12 @@ Invoke-LabCommand -ActivityName "Extract EPM files" -ComputerName $SRV01 -Script
 $InstallerPath = Join-Path "C:" -ChildPath $EPMEXEFileName.Split("_")[0]
 Install-LabSoftwarePackage -ComputerName $SRV01 -LocalPath "$InstallerPath\setup.exe" -CommandLine "/s Feature=Core" -Timeout 90
 
+#Populate local Administrators
+Write-ScreenInfo -Message "Populate EPM Admins at $SRV01" -TaskStart
+Invoke-LabCommand -ActivityName "Add locAdmin to Administrators" -ComputerName $SRV01 -ScriptBlock {
+    Add-LocalGroupMember -Group "LANDesk Administrators" -Member "maxxys\locAdmin"
+} -Credential $creds
+
 #Add additional Network for Internet Access
 $AddSwitch = $true
 $VMSwitches = @(Get-VMNetworkAdapter -VMName $SRV01 )

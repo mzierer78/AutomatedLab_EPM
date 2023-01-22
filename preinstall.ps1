@@ -2,6 +2,7 @@ Send-ALNotification -Activity "Preflight Actions" -Message " " -Provider Toast
 Write-ScreenInfo -Message "Starting preflight actions" -TaskStart
 $ISOPath = Join-Path -Path $PSScriptRoot -ChildPath "ISO"
 $ISOs = Join-Path -Path $labSources -ChildPath "ISOs"
+$SW = Join-Path -Path $labSources -ChildPath "SoftwarePackages"
 
 #DL URL Server 2019 Eval
 #$ISODownLoadURL = "https://go.microsoft.com/fwlink/p/?LinkID=2195167&clcid=0x409&culture=en-us&country=US"
